@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+    <!-- {% load static %} -->
+<!-- ROOT BASE FILE -->
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Django Homepage</title>
+<!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<!-- Local CSS definitions -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/master.css' %}" >
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <ul class="nav navbar-nav">
+
+          {# Django Home Link / Admin Link / Register Link#}
+          {% if user.is_authenticated %}
+            <li><a class="navbar-brand" href="/account/">Portal</a></li>
+          {% else %}
+            <li><a class="navbar-brand" href="{% url 'index' %}">Portal</a></li>
+          {% endif %}
+          <li><a class="navbar-link" href="{% url 'acct:signup' %}">Register</a></li>
+
+          {# Some logic on what to display for last item#}
+          {% if user.is_authenticated %}
+            <li><a href="{% url 'acct:logout' %}">Logout</a></li>
+          {% else %}
+            <li><a class="navbar-link" href="{% url 'acct:user_login' %}">Login</a></li>
+          {% endif %}
+
+        </ul>
+      </div>
+    </nav>
+        {% block content %}
+
+        {% endblock %}
+  </body>
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+  <script type="text/javascript">
+  // document.styleSheets holds the style sheets from LINK and STYLE elements
+for (var i = 0; i < document.styleSheets.length; i++) {
+
+  // Checking if there is a request for the css file
+  // We iterate the style sheets with href attribute that are created from LINK elements
+  // STYLE elements don't have href attribute, so we ignore them
+  // We also check if the href contains the css file name
+  if (document.styleSheets[i].href && document.styleSheets[i].href.match("/static/css/master.css")) {
+
+      console.log("There is a request for the css file."+document.styleSheets[i].href);
+
+      // Checking if the request is unsuccessful
+      // There is a request for the css file, but is it loaded?
+      // If it is, the length of styleSheets.cssRules should be greater than 0
+      // styleSheets.cssRules contains all of the rules in the css file
+      // E.g. b { color: red; } that's a rule
+      if (document.styleSheets[i].cssRules.length == 0) {
+
+          // There is no rule in styleSheets.cssRules, this suggests two things
+          // Either the browser couldn't load the css file, that the request failed
+          // or the css file is empty. Browser might have loaded the css file,
+          // but if it's empty, .cssRules will be empty. I couldn't find a way to
+          // detect if the request for the css file failed or if the css file is empty
+
+          console.log("Request for the css file failed.");
+
+          // There is a request for the css file, but it failed. Fallback
+          // We don't need to check other sheets, so we break;
+          break;
+      } else {
+          // If styleSheets.cssRules.length is not 0 (>0), this means
+          // rules from css file is loaded and the request is successful
+          console.log("Request for the css file is successful."+document.styleSheets[i].href);
+          break;
+      }
+  }
+  // If there isn't a request for the css file, we fallback
+  // But only when the iteration is done
+  // Because we don't want to apply the fallback at each iteration
+  else if (i == document.styleSheets.length - 1) {
+      // Fallback
+      console.log("There is no request for the css file.");
+  }
+}
+  </script>
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+</html>

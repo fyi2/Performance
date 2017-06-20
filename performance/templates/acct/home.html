@@ -1,0 +1,27 @@
+{% extends 'acct/homebase.html' %}
+{% load static %}
+
+{% block title %}Productivity Portal{% endblock %}
+
+{% block content %}
+  <h2>Productivity Portal</h2>
+  <div class="container">
+      <div class="row v-center">
+          <div class="col-xs-4">
+              <a href="#" class="thumbnail">
+              <img src="{% static "img/notes.png" %}" alt="Notes" />
+              </a>
+          </div>
+          <div class="col-xs-4">
+              <a href="#" class="thumbnail">
+                    <img class="vmiddle" src="{% static "img/todo.jpg" %}" alt="To Do" />
+              </a>
+          </div>
+          <div class="col-xs-4">
+              <a href="#" class="thumbnail">
+                    <img class="vmiddle" src="{% static "img/project-management.jpg" %}" alt="Project Management" />
+              </a>
+          </div>
+      </div>
+  </div>
+{% endblock %}

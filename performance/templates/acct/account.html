@@ -1,0 +1,31 @@
+{% extends 'acct/homebase.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static "css/forms.css"%}">
+<div class="text-center table table-hover text-centered">
+  <h2>Register</h2>
+  <form method="post">
+    {% csrf_token %}
+    <table id="t01" style="width:33%">
+      <tr>
+        <th>Item</th>
+        <th>Input</th>
+      </tr>
+        <tr>
+          <td>Username</td><td>{{ user }}</td>
+        </tr>
+        <tr>
+          <td>Firstname</td><td>{{ user.first_name }}</td>
+        </tr>
+        <tr>
+          <td>Lastname</td><td>{{ user.last_name }}</td>
+        </tr>
+        <tr>
+          <td>Email</td><td>{{ user.email }}</td>
+        </tr>
+  </table>
+  </form>
+</div>
+
+{% endblock %}

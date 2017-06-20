@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="bg-qaz">
+  <div class="col-lg-12">
+    <div class="bgimg-1">
+      {% if user.is_authenticated %}
+        <a href="/account/">
+        <div class="caption">
+          <span class="border">Personal Productivity Portal</span>
+        </div>
+        </a>
+      {% else %}
+        <a href="{% url 'acct:signup' %}">
+        <div class="caption">
+          <span class="border">Personal Productivity Portal</span>
+        </div>
+        </a>
+      {% endif %}
+    </div>
+    <div style="color: #ddd;background-color:#282E34;text-align:center;padding:50px 80px;text-align: justify;">
+      <h3 style="text-align:center;">How it works</h3>
+      <p>Access to the productivity portal is through a simple-to use online interface. Become Productive with significant activities and find that distractions and rework are significantly reduced.</p>
+      <p>
+      Productivity can be most effectively managed when it is collected at the task level. We have therefore developed a suite of tools that work in this way.</p>
+      <h4>The benefits and uses</h4>
+      <ul>
+        <li>Controlling and improving productivity</li><li>Planning and completion</li><li>Benchmarking performance</li>
+      </ul>
+    </div>
+    <div class="bgimg-2">
+      <div class="caption">
+        <span class="border" style="background-color:transparent;font-size:25px;color: #f7f7f7;text-shadow: 2px 2px 8px #000000;">LESS STRESS</span>
+      </div>
+    </div>
+  <div class="bgimg-3">
+    <div class="container-fluid">
+      <div class="form-group row-first">
+          <div class="caption">
+            <div class="col-xs-4">
+            </div>
+              <div class="col-md-4 text-center">
+                  <a href="{% url 'acct:signup' %}" class="btn btn-success btn-lg gi-3x">
+                      <span class="glyphicon glyphicon-thumbs-up "></span>   Start Now</a><br>
+                  <a href="{% url 'acct:user_login' %}" class="gi-2x"><strong>Login</strong></a>
+              </div>
+            <div class="col-xs-4">
+            </div>
+          </div>
+      </div>
+      </div>
+    </div>
+    <div class="bgimg-3">
+      <div class="form-group row">
+        <div class="col-xs-4 " id="information">
+          <div class="panel panel-default">
+            <div class="panel-heading text-center">
+              <h2 class="panel-title ">File Cabinet</h2>
+            </div>
+            <div class="panel-body lead" id="try1">
+            Imagine owning your own personal Evernote.The app is organized notes. Just like in real life. You create a notes for a particular subject/topic,
+            then fill File Cabinet with notes, that you'll <em>never lose</em>. <br> So come on it and give it a try?    </div>
+          </div>
+        </div>
+        <div class="col-xs-4" id="information">
+          <div class="panel panel-default">
+            <div class="panel-heading text-center">
+              <h2 class="panel-title">To Do List</h2>
+            </div>
+            <div class="panel-body lead" id="try1">
+              <strong>Take control of life</strong>, become the mover and shaker you know you can be. <br>Creates order - A to do list is an orderly way to organize how to do the things you want to do.
+              <br><strong>Prioritize</strong>. Manage life effectively.
+              <br> Be known for you top tier <strong>accountability</strong>.
+              <br>Rescheduling and <strong>organizing your time</strong>.
+              <br>Start feeling <strong>Productive</strong> again.
+              <br><strong>Kill Stress</strong>.
+            </div>
+          </div>
+        </div>
+          <div class="col-xs-4" id="information">
+            <div class="panel panel-default">
+              <div class="panel-heading text-center">
+                <h2 class="panel-title">Project Management</h2>
+              </div>
+              <div class="panel-body lead" id="try1">
+                The benefits of project management are ten-fold: you actually gets to manage and lead in life.
+                Feel the trill of seeing a specific project reach fruition.
+                <br>And finally, people around you benefit because without your leadership the project wouldn’t get started in the first place, much less finished.
+                <br>Additionally, people able to take a stake in something, work with it and see a project through from start to finish.
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}
