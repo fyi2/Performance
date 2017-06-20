@@ -1,4 +1,4 @@
-# performance
+# Performance
 Initial Django Build
 My Productivity Portal Built using the Django framework.
 
