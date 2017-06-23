@@ -1,0 +1,60 @@
+{% extends 'cabinet/homebase.html' %}
+{% load static %}
+
+
+{% block content %}
+<link rel="stylesheet" href="{% static "css/cabinet_table.css"%}">
+<link rel="stylesheet" href="{% static "css/cabinet_classes.css"%}">
+<div class="col-lg-2 vscroll">
+  <h2>Tags</h2>
+  {% for tag in tags.object_list%}
+  <p id="tag_{{ tag }}">{{ tag }}</p>
+  {% endfor %}
+
+</div>
+<div class="col-lg-8">
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <th colspan="3"style="text-align: center;"><h2>{{ user.username|capfirst }} Notes</h2></th>
+      {% for note in note_list %}
+        <tr>
+          <td ><a href="{% url "cabinet:note_edit" note.id %}">{{ note.title }}</a></td>
+          <td>{{ note.text|truncatewords:15 }}</td>
+          <td><button type="button" class="btn btn-info btn-success" data-toggle="modal" data-target="#deleteModal{{ note.id }}">Delete</button></td>
+
+        </tr>
+      {% endfor %}
+    </table>
+  </div>
+
+
+<!-- Pagination below -->
+  {% if note_list.has_other_pages %}
+    <ul class="pagination">
+      {% if note_list.has_previous %}
+        <li><a href="?page={{ note_list.previous_page_number }}">&laquo;</a></li>
+      {% else %}
+        <li class="disabled"><span>&laquo;</span></li>
+      {% endif %}
+      {% for i in note_list.paginator.page_range %}
+        {% if note_list.number == i %}
+          <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+        {% else %}
+          <li><a href="?page={{ i }}">{{ i }}</a></li>
+        {% endif %}
+      {% endfor %}
+      {% if note_list.has_next %}
+        <li><a href="?page={{ users.next_page_number }}">&raquo;</a></li>
+      {% else %}
+        <li class="disabled"><span>&raquo;</span></li>
+      {% endif %}
+    </ul>
+  {% endif %}
+  </div>
+  <div class="col-lg-2">
+  </div>
+
+{% include 'cabinet/_note_list_modal.html' %}
+
+
+{% endblock %}

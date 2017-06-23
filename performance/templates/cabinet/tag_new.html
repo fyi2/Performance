@@ -1,0 +1,42 @@
+{% extends 'cabinet/homebase.html' %}
+{% load static %}
+
+
+{% block content %}
+<link rel="stylesheet" href="{% static "css/cabinet.css"%}">
+<div class="col-lg-2">
+  <h2>Tags</h2>
+  {% for tag in tags.object_list%}
+  <p id="tag_{{ tag }}">{{ tag }}</p>  
+  {% endfor %}
+</div>
+<div class="col-lg-8">
+  <h2 style="text-align: center;">New Tag</h2><br>
+    <form action = "{% url "cabinet:tag_new" %}" method="post">{% csrf_token %}
+      <div style="text-align: center;">
+        {% if form.errors %}
+             {% for error in form.errors %}
+             <p class="error-message">
+                 <strong>{{ error }}</strong> was missing
+             </p>
+             {% endfor %}
+         {% endif %}      </div>
+      <table align="center">
+        <tr class="spaceUnder">
+          <td style="text-align: center;">
+            <input type = "text"
+                placeholder = "New Tag" name = "user_tag" />
+          </td>
+        </tr>
+      </table><br>
+      <div style="text-align:center;">
+        <button type="submit" value="Submit"class="btn btn-primary">Create</button>
+      </div>
+    </form>
+
+</div>
+<div class="col-lg-2">
+</div>
+
+
+{% endblock %}

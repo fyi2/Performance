@@ -1,0 +1,19 @@
+table td {
+  display: table-cell;
+  vertical-align: center;
+  width: 80%;
+  margin: 0px auto;
+  float: none;
+
+}
+tr.spaceUnder>td {
+  padding-bottom: 2em;
+}
+.col-centered{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.dCenter td{
+text-align: center;
+}

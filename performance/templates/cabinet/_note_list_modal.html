@@ -1,0 +1,35 @@
+{% for note in note_list %}
+
+<!-- Modal {{ note.id }} -->
+<div class="modal fade" id="deleteModal{{ note.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel{{ note.id }}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel{{ note.id }}">Delete Note</h4>
+      </div>
+      <div class="modal-body">
+        <h4>Title :</h4> {{ note.title }}<br>
+        <h4>Idea:</h4> {{ note.text|truncatewords:25 }}
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" onclick="settleUp{{ note.id }}()" >Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="hiddenForm{{ note.id }}" style="display: none" class="visibility=hidden">
+  <form class="" action="/fc/delete/{{ note.id }}" name="hiddenForm{{ note.id }}" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="deleteNote{{ note.id }}" id="deleteNote{{ note.id }}" value="{{ note.id }}">
+    <!-- <button type="submit" name="betBalance">Update Balance</button> -->
+  </form>
+</div>
+<script type="text/javascript">
+  function settleUp{{ note.id }}(){
+    document.forms.hiddenForm{{ note.id }}.submit()
+  }
+</script>
+{% endfor %}

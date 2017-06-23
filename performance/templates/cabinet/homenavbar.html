@@ -1,24 +1,28 @@
 <nav class="navbar navbar-default techfont custom-navbar">
     <div class="container">
       <ul class="nav navbar-nav">
-        <li><a class='navbar-brand bigbrand' href="/account/">Portal</a></li>
-        <li class="nav navbar-nav">
-          {% if request.get_full_path == "/account/profile/" %}
-          <a href="{% url 'acct:edit_profile' %}">Edit Profile</a>
-          {% endif %}</li>
+        {% if request.session.cabinet %}
+        <li><a class='navbar-brand bigbrand' href="/fc/?page=1"><span class="glyphicon glyphicon-home" style="font-size: 1.5em;"></span></a></li>
+        <li><a class='navbar-nav' href="/fc/tag"><span class="glyphicon glyphicon glyphicon-tag"></span></a></li>
+        <li class="nav navbar-nav"><a href="/fc/new"><span class="glyphicon glyphicon-pencil"></span></a>
+        </li>
+        {% else %}
+          <li><a class='navbar-brand bigbrand' href="/account/"><span class="glyphicon glyphicon-home"></span></a></li>
+
+        {% endif %}
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
         {% if user.is_authenticated %}
-        <li>
-          <a href="/fc/" ><span class="glyphicon glyphicon-file"></span></a>
-        </li>
-        <li>
-          <a href="#"><span class="glyphicon glyphicon-list-alt"></span></a>
-        </li>
-        <li>
-          <a href="#"><span class="glyphicon glyphicon-dashboard"></span></a>
-        </li>
+          <li>
+            <a href="/fc/?page=1" ><span class="glyphicon glyphicon-file"></span></a>
+          </li>
+          <li>
+            <a href="#"><span class="glyphicon glyphicon-list-alt"></span></a>
+          </li>
+          <li>
+            <a href="#"><span class="glyphicon glyphicon-dashboard"></span></a>
+          </li>
           <li>
             <a href="/account/logout/" >Log out</a>
           </li>
