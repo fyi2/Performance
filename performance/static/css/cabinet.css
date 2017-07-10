@@ -7,7 +7,7 @@ table td {
 
 }
 tr.spaceUnder>td {
-  padding-bottom: 2em;
+  padding-bottom: 5em;
 }
 .col-centered{
     display: flex;
@@ -16,4 +16,13 @@ tr.spaceUnder>td {
 }
 .dCenter td{
 text-align: center;
+}
+.tagcolor {
+  background-color: green;
+  color: white;
+}
+.vscroll {
+float:left;
+overflow-y: auto;
+height: 500px;
 }

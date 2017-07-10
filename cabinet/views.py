@@ -7,16 +7,11 @@ from cabinet.forms import NoteForm, TagForm
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
-#class NoteForm(ModelForm):
-#    class Meta:
-#        model = Note
-#        fields = ['title','text']
-
 def note_list(request, template_name='cabinet/note_list.html'):
     data = Note.objects.all().filter(user=request.user).order_by('-created')
     notes = {}
     notes['object_list'] = data
-    data_t = Tag.objects.all().filter(user=request.user)
+    data_t = Tag.objects.all().filter(user=request.user).order_by('user_tag')
     tags = {}
     tags['object_list'] = data_t
 
@@ -40,7 +35,7 @@ def note_list(request, template_name='cabinet/note_list.html'):
 
 def note_create(request, template_name='cabinet/note_new.html'):
     form = NoteForm(request.POST or None)
-    data = Tag.objects.all().filter(user=request.user)
+    data = Tag.objects.all().filter(user=request.user).order_by('user_tag')
     tags = {}
     tags['object_list'] = data
 
@@ -54,11 +49,12 @@ def note_create(request, template_name='cabinet/note_new.html'):
         instance.save()
         tag_updateDB(tag_fest(instance.text_tag), instance.user)
 
-        return redirect('cabinet:note_list')
+        # return redirect('cabinet:note_list')
+        return redirect('/fc/?page=1')
     return render(request, template_name, {'form':form,'tags':tags})
 
 def note_update(request, pk, template_name='cabinet/note_form.html'):
-    data = Tag.objects.all().filter(user=request.user)
+    data = Tag.objects.all().filter(user=request.user).order_by('user_tag')
     tags = {}
     tags['object_list'] = data
     note = get_object_or_404(Note, pk=pk)
@@ -69,7 +65,8 @@ def note_update(request, pk, template_name='cabinet/note_form.html'):
         instance.text_tag = tag_fest(instance.text_tag).lower()
         instance.save()
         tag_updateDB(tag_fest(instance.text_tag), instance.user)
-        return redirect('cabinet:note_list')
+        # return redirect('cabinet:note_list')
+        return redirect('/fc/?page=1')
     return render(request, template_name, {'form':form,'tags':tags})
 
 def tag_updateDB(tags,iuser):
@@ -91,7 +88,7 @@ def note_delete(request, pk):
     return redirect('cabinet:note_list')
 
 def tag_create(request, template_name='cabinet/tag_new.html'):
-    data = Tag.objects.all().filter(user=request.user)
+    data = Tag.objects.all().filter(user=request.user).order_by('user_tag')
     tags = {}
     tags['object_list'] = data
 

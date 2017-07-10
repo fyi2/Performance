@@ -4,11 +4,15 @@
 
 {% block content %}
 <link rel="stylesheet" href="{% static "css/cabinet_table.css"%}">
-<link rel="stylesheet" href="{% static "css/cabinet_classes.css"%}">
+<div id="app">
+
 <div class="col-lg-2 vscroll">
   <h2>Tags</h2>
   {% for tag in tags.object_list%}
-  <p id="tag_{{ tag }}">{{ tag }}</p>
+  <p  id="tag_{{ forloop.counter }}" class=""
+      @mouseover="turnGreen"
+      @mouseleave="turnBlack"
+      :class="{tagcolor: isActive == 'tag_{{ forloop.counter }}'}">{{ tag }}</p>
   {% endfor %}
 
 </div>
@@ -53,8 +57,10 @@
   </div>
   <div class="col-lg-2">
   </div>
-
+</div>
 {% include 'cabinet/_note_list_modal.html' %}
-
-
 {% endblock %}
+{% block extra_js %}
+<script src="/static/js/cabinet.js"></script>
+
+{% endblock%}

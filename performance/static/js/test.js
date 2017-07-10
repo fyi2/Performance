@@ -1,1 +1,1 @@
-alert("JS running!")
+alert("Loaded Javascript")

@@ -14,3 +14,12 @@ textarea {
   min-width: 600px;
   height: auto;
 }
+.tagcolor {
+  background-color: green;
+  color: white;
+}
+.vscroll {
+float:left;
+overflow-y: auto;
+height: 500px;
+}

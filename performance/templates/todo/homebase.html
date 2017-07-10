@@ -1,10 +1,7 @@
 <!DOCTYPE html>
-{% load static %}
-<!-- CORE BASE FILE -->
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Productivity Portal</title>
     <!-- Latest compiled and minified JQuery -->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 
@@ -18,14 +15,10 @@
     {% block head_inject %}
     {% endblock %}
     {% load bootstrap3 %}
-    {% verbatim comments %}
-    <!-- {% bootstrap_css %}
-    {% bootstrap_javascript %} -->
-    {% endverbatim comments %}
   </head>
   <body>
 
-    {% include "cabinet/homenavbar.html" %}
+    {% include "todo/homenavbar.html" %}
     <div class="container">
         {% block content %}
 
