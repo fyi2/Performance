@@ -1,4 +1,4 @@
-{% extends 'cabinet/homebase.html' %}
+{% extends 'acct/homebase.html' %}
 {% load static %}
 
 
@@ -7,14 +7,21 @@
 <div id="app">
 
 <div class="col-lg-2 vscroll">
-  <h2>Tags</h2>
-  {% for tag in tags.object_list%}
-  <p  id="tag_{{ forloop.counter }}" class=""
-      @mouseover="turnGreen"
-      @mouseleave="turnBlack"
-      :class="{tagcolor: isActive == 'tag_{{ forloop.counter }}'}">{{ tag }}</p>
-  {% endfor %}
+  <div class = "panel panel-success">
+     <div class = "panel-heading">
+        <h3 class = "panel-title text-center"><strong>Tags</strong></h3>
+     </div>
+     <div class = "panel-body">
+      {% for tag in tags.object_list%}
+        <button  id="tag_{{ forloop.counter }}" class="btn btn-success badge-bar"
+         @mouseover="turnGreen"
+         @mouseleave="turnBlack"
+         :class="{tagcolor: isActive == 'tag_{{ forloop.counter }}'}">{{ tag }}
+         <span class="badge">4</span></button><br>
+     {% endfor %}
+    </div>
 
+  </div>
 </div>
 <div class="col-lg-8">
   <div class="table-responsive">
@@ -61,6 +68,6 @@
 {% include 'cabinet/_note_list_modal.html' %}
 {% endblock %}
 {% block extra_js %}
-<script src="/static/js/cabinet.js"></script>
+<script src="/static/js/tags.js"></script>
 
 {% endblock%}

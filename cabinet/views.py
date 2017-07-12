@@ -40,7 +40,6 @@ def note_create(request, template_name='cabinet/note_new.html'):
     tags['object_list'] = data
 
     if form.is_valid():
-        print("And the form is valid")
         instance = form.save(commit=False)
         instance.user = request.user
         instance.htmltext = misaka.html(instance.text)

@@ -9,8 +9,8 @@
         <h4 class="modal-title" id="myModalLabel{{ note.id }}">Delete Note</h4>
       </div>
       <div class="modal-body">
-        <h4>Title :</h4> {{ note.title }}<br>
-        <h4>Idea:</h4> {{ note.text|truncatewords:25 }}
+        <strong>Title:</strong>  {{ note.title }}<br>
+        <strong>Idea:</strong> {{ note.text|truncatewords:25 }}
         ...
       </div>
       <div class="modal-footer">

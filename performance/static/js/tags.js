@@ -1,4 +1,4 @@
-new Vue({
+var tags = new Vue({
   el: '#app',
   delimiters: ['[[', ']]'],
   data: {

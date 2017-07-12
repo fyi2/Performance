@@ -1,5 +1,3 @@
-<div id="navbar">
-
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -20,22 +18,27 @@
     <div class="collapse navbar-collapse" id="main-navbar">
       <ul class="nav navbar-nav">
         {%if  request.path == '/fc/' %}
-        <li><a class="active glyphicon glyphicon-pencil"  gi-15x data-toggle="tooltip"
-          data-placement="right" title="New" href="/fc/new"><span class="sr-only">(current)</span></a>
-        </li>
+          <li><a class="active glyphicon glyphicon-pencil"  gi-15x data-toggle="tooltip"
+            data-placement="right" title="New" href="/fc/new"><span class="sr-only">(current)</span></a>
+          </li>
         {% endif %}
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
           aria-haspopup="true" aria-expanded="false">Habits
           <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            {% for habit in habits.object_list%}
-              <li><button id="tag_{{ habit.pk }}" class="btn btn-primary
-                badge-bar center-block" :disabled='disabled[{{ forloop.counter }}]'
-                @click="seinfeld({{ forloop.counter }})" type="button">
-              {{ habit }} <span class="badge ">{{ habit.count}} </span>
-              </button></li>
-           {% endfor %}
+            <li><button class="btn btn-primary badge-bar center-block" type="button">
+            Walk <span class="badge ">4</span>
+            </button></li>
+            <li><button class="btn btn-primary badge-bar center-block" type="button">
+            Water <span class="badge">4</span>
+            </button></li>
+            <li><button class="btn btn-primary badge-bar center-block" type="button">
+            No Alcohol <span class="badge">4</span>
+            </button></li>
+            <li><button class="btn btn-primary badge-bar center-block" type="button">
+            Thankfulness <span class="badge">4</span>
+            </button></li>
           </ul>
         </li>
       </ul>
@@ -45,7 +48,7 @@
             data-placement="left" title="Notes"></span></a>
         </li>
         <li>
-          <a href="/td"><span class="glyphicon glyphicon-list-alt  gi-15x"data-toggle="tooltip" data-placement="left" title="To Do"></span></a>
+          <a href="#"><span class="glyphicon glyphicon-list-alt  gi-15x"data-toggle="tooltip" data-placement="left" title="To Do"></span></a>
         </li>
         <li><a href="/account/logout/"><span class="glyphicon glyphicon glyphicon-off gi-15x" data-toggle="tooltip"
           data-placement="left" title="Log Out"></span></a>
@@ -78,4 +81,3 @@
     {% endif %}
     </div><!-- /.container-fluid -->
 </nav>
-</div>

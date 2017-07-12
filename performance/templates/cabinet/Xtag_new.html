@@ -1,4 +1,4 @@
-{% extends 'cabinet/homebase.html' %}
+{% extends 'acct/homebase.html' %}
 {% load static %}
 
 
@@ -7,7 +7,7 @@
 <div class="col-lg-2">
   <h2>Tags</h2>
   {% for tag in tags.object_list%}
-  <p id="tag_{{ tag }}">{{ tag }}</p>  
+  <p id="tag_{{ tag }}">{{ tag }}</p>
   {% endfor %}
 </div>
 <div class="col-lg-8">

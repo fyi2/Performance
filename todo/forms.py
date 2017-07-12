@@ -1,16 +1,16 @@
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django import forms
 from django.contrib.auth.models import User
-from .models import Note, Tag
+from .models import Task, Habit
 
 
-class NoteForm(forms.ModelForm):
-    title = forms.CharField(
+class TaskForm(forms.ModelForm):
+    task = forms.CharField(
             widget=forms.TextInput(
             attrs={
                 'style': 'display:table-cell; width:100%'
             }))
-    text_tag = forms.CharField(
+    task_tag = forms.CharField(
             required=False,
             widget=forms.TextInput(
             attrs={
@@ -19,10 +19,10 @@ class NoteForm(forms.ModelForm):
                 'style': 'display:table-cell; width:100%'
             }))
     class Meta:
-        model = Note
-        fields = ('title','text', 'text_tag')
+        model = Task
+        fields = ('task','task_tag', 'priority', 'status', 'action', 'start_date', 'due_date')
 
-class TagForm(forms.ModelForm):
+class HabitForm(forms.ModelForm):
     class Meta:
-        model = Tag
-        fields = ('user_tag',)
+        model = Habit
+        fields = ('habit','active_habit')
