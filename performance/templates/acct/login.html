@@ -4,33 +4,80 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-  <link rel="stylesheet" href="{% static "css/forms.css"%}">
+<div id="acct">
+  <link rel="stylesheet" href="{% static "css/base.css"%}">
   <div class="text-center table table-hover text-centered">
     <h2>Login</h2>
-    <form method="post">
-      {% csrf_token %}
-      <table id="t01" style="width:33%">
-        <tr>
-          <th>Item</th>
-          <th>Input</th>
-        </tr>
-
-      {% for field in form %}
-        <tr>
-
-        <div class="fieldWrapper">
-          {{ field.errors }}
-            <td>{{ field.label_tag }}</td>
-            <td>{{ field }}</td>
-        </div>
-      </tr>
-      {% endfor %}
+  </div>
+  <table id="t01" style="width:33%">
+    <form class="form-horizontal" name="LoginForm" action="/account/login/" method="post" onsubmit="setLocalStorage();">
+    {% csrf_token %}
+    {% if next %}
+        <input type="hidden" name="next" value="{{ next }}" />
+    {% endif %}
+    <div class="control-group">
       <tr>
-        <td colspan="2" style="text-align:center;">    <!-- Indicates a successful or positive action -->
-            <button type="submit" class="btn btn-success">Success</button>
+        <td>
+          <label class="control-label" for="username">Username</label>
+        </td>
+        <td>
+          <div class="controls">
+              <input type="text" id="username" name="username"  placeholder="Username">
+          </div>
         </td>
       </tr>
-    </table>
+    </div>
+    <div class="control-group">
+      <tr>
+        <td>
+          <label class="control-label" for="password">Password</label>
+        </td>
+        <td>
+          <div class="controls">
+              <input type="password" name="password" id="password" placeholder="Password">
+          </div>
+        </td>
+      </tr>
+    </div>
+    <tr>
+      <td colspan="2" style="text-align:center;">
+        <div class="control-group">
+            <div class="controls">
+                <button type="submit" class="btn btn-success" >Login</button>
+            </div>
+        </div>
+      </td>
+    </tr>
     </form>
-  </div>
+  </table>
+</div>
+{% endblock %}
+
+{% block extra_js%}
+<script type="text/javascript">
+function setLocalStorage()
+{
+  var u = document.getElementById("username").value;
+  var p = document.getElementById("password").value;
+  var authToken = {token:5}
+  localStorage.setItem('username',u) ;
+  localStorage.setItem('password',p) ;
+  fetch("http://127.0.0.1:8000/api/login/", {
+  headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json'
+  },
+  method: "POST",
+  //make sure to serialize your JSON body
+  body:  JSON.stringify({ username: u,
+               password: p })
+   }).then(response => response.json())
+ .then(json => authToken = json)
+ .then(console.log(authToken))
+ .then(localStorage.setItem("token",authToken.token))
+  return true
+}
+
+</script>
+
 {% endblock %}

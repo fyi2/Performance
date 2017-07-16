@@ -1,4 +1,10 @@
+from re import sub
 from django.shortcuts import render
+
+from rest_framework.authtoken.models import Token
+from django.contrib.auth.models import User
+
+
 
 from rest_framework import viewsets
 from rest_framework.views import APIView
@@ -11,6 +17,7 @@ from rest_framework.authtoken.views import ObtainAuthToken
 
 from . import serializers
 from todo import models
+from . import permissions
 
 # Create your views here.
 
@@ -28,61 +35,17 @@ class LoginViewSet(viewsets.ViewSet):
 class UserHabitViewSet(viewsets.ModelViewSet):
     """Handles creating, reading and updating habit items."""
 
-#    authentication_classes = (TokenAuthentication,)
     serializer_class = serializers.UserHabitSerializer
-    queryset = models.Habit.objects.all()
-    authentication_classes = (TokenAuthentication,)
-#    permission_classes = (permissions.PostOwnStatus, IsAuthenticatedOrReadOnly)
 
     def perform_create(self, serializer):
         """Sets the user profile to the logged in user."""
         serializer.save(user=self.request.user)
 
 
-class HelloApiView(APIView):
-    """Test API View."""
+    def get_queryset(self):
+        queryset = models.Habit.objects.all().filter(user = self.request.user)
+        return queryset
 
-    serializer_class = serializers.HelloSerializer
-
-    def get(self, request, format=None):
-        """Returns a list of APIView features."""
-
-        an_apiview = [
-            'Uses HTTP methods as function (get, post, patch, put, delete)',
-            'It is similar to a traditional Django view',
-            'Gives you the most control over your logic',
-            'Is mapped manually to URLs'
-        ]
-
-        return Response({'message': 'Hello!', 'an_apiview': an_apiview})
-
-    def post(self, request):
-        """Create a hello message with our name."""
-
-        serializer = serializers.HelloSerializer(data=request.data)
-
-        if serializer.is_valid():
-            name = serializer.data.get('name')
-            message = 'Hello {0}'.format(name)
-            return Response({'message': message})
-        else:
-            return Response(
-                serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    def put(self, request, pk=None):
-        """Handles updating an object."""
-
-        return Response({'method': 'put'})
-
-    def patch(self, request, pk=None):
-        """Patch request, only updates fields provided in the request."""
-
-        return Response({'method': 'patch'})
-
-    def delete(self, request, pk=None):
-        """Deletes and object."""
-
-        return Response({'method': 'delete'})
 
 
 class HelloViewSet(viewsets.ViewSet):

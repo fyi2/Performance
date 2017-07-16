@@ -5,7 +5,7 @@ table {
     float: none;
 }
 table, th, td {
-    border: 1px solid black;
+
     border-collapse: collapse;
 }
 th, td {
@@ -21,4 +21,27 @@ table#t01 tr:nth-child(odd) {
 table#t01 th {
     background-color: black;
     color: white;
+}
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.row-top-buffer {
+    margin-top:20px;
+}
+textarea {
+  min-height: 300px;
+  min-width: 600px;
+  height: auto;
+}
+.tagcolor {
+  background-color: green;
+  color: white;
+}
+.vscroll {
+float:left;
+overflow-y: auto;
+height: 500px;
 }

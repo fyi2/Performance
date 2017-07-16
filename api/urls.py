@@ -12,7 +12,7 @@ from . import views
 
 router = DefaultRouter()
 router.register('hello-viewset', views.HelloViewSet, base_name='hello-viewset')
-router.register('habit', views.UserHabitViewSet)
+router.register('habit', views.UserHabitViewSet, base_name='habit')
 router.register('login', views.LoginViewSet, base_name='login')
 
 

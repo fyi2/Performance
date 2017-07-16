@@ -1,16 +1,19 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.core.urlresolvers import reverse
-from django.contrib.auth import login, authenticate, update_session_auth_hash
+from django.contrib.auth.models import User
+from django.contrib.auth import login as auth_login, authenticate, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import (
         UserCreationForm,
         UserChangeForm,
         PasswordChangeForm
         )
-from django.contrib.auth.models import User
+from rest_framework.authtoken.models import Token
+from django.template import RequestContext
+
 from django.conf import settings
-from django.shortcuts import render, redirect
+from django.shortcuts import render_to_response, render, redirect
 from acct.forms import ( EditAccountForm, SignUpForm,
                         ProfileForm
                         )
@@ -20,6 +23,22 @@ from django.views.generic import (TemplateView,ListView,
                                   UpdateView,DeleteView)
 
 # Create your views here.
+
+def login(request):
+#    logout(request)
+    username = password = ''
+    if request.POST:
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            if user.is_active:
+                auth_login(request,user)
+                args = {'username':username, 'password':password}
+                return render(request,"acct/home.html", args)
+    return render(request, 'acct/login.html', {})
+
+
 
 def view_profile(request):
     form = UserProfile.objects.get(user=request.user)
@@ -54,6 +73,7 @@ def signup(request):
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
+            Token.objects.create(user=user)
             login(request, user)
             return render(request,"acct/home.html", {})
     else:
